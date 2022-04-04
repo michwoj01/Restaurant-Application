@@ -1,0 +1,32 @@
+#container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width:100%;
+  flex-direction: column;
+}
+#Pers{
+  display: flex;
+  flex-direction: row;
+  row-gap:5vh;
+}
+#Pers button {
+  font-size: 3vw;
+}
+#list{
+  display: flex;
+  flex-direction: column;
+  padding : 2vw;
+  background-color: darkviolet;
+}
+.user{
+  padding: 0.5vh 0.5vw;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  column-gap: 1vw;
+  justify-content: space-between;
+  background-color: yellowgreen;
+}
+.ban{
+
+}

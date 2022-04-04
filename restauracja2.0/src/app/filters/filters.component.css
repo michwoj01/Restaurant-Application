@@ -1,0 +1,32 @@
+
+#container{
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  width: 100%;
+  justify-content: space-between;
+  padding: 0 2vw 1vh;
+  box-sizing: border-box;
+  background-color: #9eec3e;
+  font-size: 1.5vw;
+  row-gap: 1vh;
+}
+h5{
+  padding:1vh;
+  margin:0;
+}
+@media (max-width:1000px){
+  #container {
+    grid-template-columns: auto;
+    font-size: 2vw;
+  }
+  #gwiazdki,#kuchnia,#kategoria{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  div > div  > div > label{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+}

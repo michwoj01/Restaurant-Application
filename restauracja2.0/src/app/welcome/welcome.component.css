@@ -1,0 +1,9 @@
+#container{
+  text-align: center;
+}
+#contact{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  column-gap: 5vw;
+}

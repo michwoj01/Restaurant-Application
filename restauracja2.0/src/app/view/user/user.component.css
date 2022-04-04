@@ -1,0 +1,31 @@
+#container{
+  width:100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin : 2vh 0;
+}
+#list{
+  background-color: #e600ff;
+  padding:2vw;
+  display: flex;
+  flex-direction: row;
+  column-gap: 2vw;
+  flex-wrap: wrap;
+}
+.dish{
+  margin:1vh 1vw;
+  background-color: orange;
+  padding:0.5vh;
+  font-size : 1.5vw;
+}
+.once{
+  background-color: #9eec3e;
+  margin:0.3vw;
+  padding:0.5vw;
+}
+h3,p{
+  padding:0;
+  margin:0;
+}

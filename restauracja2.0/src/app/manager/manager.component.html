@@ -1,0 +1,16 @@
+<nav>
+  <button id="filter" (click)="show=!show">Filtry</button>
+</nav>
+<app-filters [hidden]="show"></app-filters>
+<div id="new"><a style="text-align: center" routerLink="/add" routerLinkActive="active" (click)="service.currDish=undefined" ><button id="newDish">Dodaj nowe danie + </button></a></div>
+<app-paginator  [endPage]="(service.myOrders | kitchen | category | rate | price).length/service.size"></app-paginator>
+<div id="container">
+  <div *ngFor="let order of (service.myOrders | kitchen | category | rate | price) | paginate : service.page: service.size; " class="dish">
+   <a routerLink="/add" routerLinkActive="active" (click)="service.currDish = order.dish"><img src="{{order.dish.images[0]}}" alt="zdjęcie"></a>
+    <div class="info">
+      <span class="name">{{order.dish.name}}</span>
+      <span class="price">{{service.currencyRate(order.dish.price)}} {{service.sharedData}}</span>
+      <button class="delete" (click) = "service.deleteDish(order)"><fa-icon [icon]="trashBin"></fa-icon> </button>
+    </div>
+  </div>
+</div>

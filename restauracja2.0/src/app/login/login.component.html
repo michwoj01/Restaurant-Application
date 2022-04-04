@@ -1,0 +1,16 @@
+<div class="formbody">
+  <form style="width:100%" [formGroup]="loginForm" (ngSubmit)="login()">
+    <div class="header">Zaloguj się</div>
+    <div>
+      <input type="text" formControlName="email" placeholder="Email" id="email">
+      <span *ngIf="isValid('email')">Entered email is invalid</span>
+    </div>
+    <div>
+      <input type="password" formControlName="password" placeholder="Password" id="pass">
+      <span *ngIf="isValid('password')">Password is a mandatory field</span>
+    </div>
+    <div style="margin-top:20px;">
+      <button type="submit" class="form-btn">Log in</button>
+    </div>
+  </form>
+</div>

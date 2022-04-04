@@ -1,0 +1,28 @@
+<div [ngClass]="{'logged': auth.isLoggedIn, 'guest':!auth.isLoggedIn}">
+  <div id="title">
+    <h3>Świniarnia</h3>
+    <h4>Może i drogo, ale za to nie najsmaczniej</h4>
+  </div>
+  <div id="orderSummary" [hidden]= "checkOrders()">
+    <span>Zamówione dania: {{service.orderCount}} <br> Kwota zamówienia: {{service.currencyRate(service.amount)}}{{service.sharedData}}</span>
+  </div>
+  <div id="changeCurrent">
+    <a routerLink="/home" routerLinkActive="active"><button id="home"><i class="fas fa-home"></i></button></a>
+    <a routerLink="/dishes" routerLinkActive="active"><button id="menu">Menu</button></a>
+    <div>
+    <button id="dolar" (click)="change('$')">$</button>
+    <button id="euro" (click)="change('€')">€</button>
+    </div>
+  </div>
+  <div  id="clients">
+    <a [hidden]="!auth.isLoggedIn" routerLink="/admin-view" routerLinkActive="active"><button id="admin">Admin</button></a>
+    <a [hidden]="!auth.isLoggedIn" routerLink="/manager" routerLinkActive="active"><button id="menago">Manager</button></a>
+    <a [hidden]="!auth.isLoggedIn" routerLink="/user"  routerLinkActive="active"><button id="hist">{{auth.username}}</button></a>
+    <a [hidden]="!auth.isLoggedIn" routerLink="/basket"  routerLinkActive="active"><button id="basket"><i class="fas fa-shopping-basket"></i></button></a>
+  </div>
+  <div id="online">
+    <a routerLink="/register" routerLinkActive="active" [hidden]="auth.isLoggedIn"><button>Zarejestruj się</button></a>
+    <a routerLink="/login" routerLinkActive="active" [hidden]="auth.isLoggedIn"><button>Zaloguj się</button></a>
+    <a [hidden]="!auth.isLoggedIn"><button (click)="auth.SignOut();cleanBasket()" >Wyloguj się</button></a>
+  </div>
+</div>
