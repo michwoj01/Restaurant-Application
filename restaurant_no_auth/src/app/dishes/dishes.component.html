@@ -1,0 +1,31 @@
+<nav>
+  <button id="filter" (click)="show=!show">Filtry</button>
+</nav>
+<app-filters [hidden]="show"></app-filters>
+<app-paginator  [endPage]="(service.myOrders | kitchen | category | rate | price).length/service.size"></app-paginator>
+<div id="container">
+  <div *ngFor="let order of (service.myOrders | kitchen | category | rate | price) | paginate : service.page: service.size; " [ngStyle]="{'border-color':service.checkExtr(order.dish.price)}" class="dish">
+    <a routerLink="/dish/{{order.dish.id}}" routerLinkActive="active"><img src="{{order.dish.images[0]}}" alt="zdjęcie"></a>
+    <div class="info">
+      <a routerLink="/dish/{{order.dish.id}}" routerLinkActive="active"><span class="name">{{order.dish.name}}</span></a>
+      <div class="numbers">
+        <ng-template [ngIf]="order.dish.units>order.instock" [ngIfElse]="soldOut">
+          <div class="instock" [ngStyle]="{'color': service.changeColor(order)}">
+            Dostępne: {{order.dish.units - order.instock}}
+          </div>
+        </ng-template>
+        <ng-template #soldOut>
+          <div class="instock" style="color:red">
+            Niedostępne
+          </div>
+        </ng-template>
+        <span class="price">{{service.currencyRate(order.dish.price)}} {{service.sharedData}}</span>
+        <button class="plus" *ngIf="order.dish.units > order.instock" (click) = "service.add(order)">+</button>
+        <button class="minus" *ngIf="order.instock > 0" (click) = "service.substract(order)">-</button>
+      </div>
+    </div>
+    <button class="delete" (click) = "service.deleteDish(order)"><fa-icon [icon]="trashBin"></fa-icon> </button>
+  </div>
+  <a style="align-self: center" routerLink="/add" routerLinkActive="active" ><button id="newDish">Dodaj nowe danie + </button></a>
+</div>
+

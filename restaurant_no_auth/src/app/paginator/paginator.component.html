@@ -1,0 +1,12 @@
+<div id="container">
+  <span id="size">
+    <button (click)="service.size = 2; service.page=1">2</button>
+    <button (click)="service.size = 5;service.page=1" >5</button>
+    <button (click)="service.size = 8; service.page=1" >8</button>
+  </span>
+  <span id="page">
+  <button (click)="service.page= service.page-1" [disabled]="service.page==1"><</button>
+  <p>Strona {{service.page}}</p>
+  <button (click)="service.page=service.page+1" [disabled]="service.page>=endPage">></button>
+  </span>
+</div>

@@ -1,0 +1,68 @@
+<div id="container">
+<button (click)="location.back()" id="close"><i class="fas fa-times"></i></button>
+<form [formGroup]="dishForm" (ngSubmit)="service.addDish(this.dishForm.value); dishForm.reset()">
+  <table>
+    <tr>
+      <td><label for="name">Nazwa</label></td>
+      <td><input id="name" type="text" formControlName="name">
+        <p *ngIf="name.invalid && (name.dirty || name.touched)"
+           class="alert alert-danger"> Wymagana nazwa dania</p></td>
+      <td><label for="description">Opis</label></td>
+      <td><textarea id="description" rows="4" formControlName="description"></textarea>
+        <p *ngIf="description.invalid && (description.dirty || description.touched)"
+             class="alert alert-danger"> Opis musi mieć od 50 do 500 znaków</p>
+      </td>
+    </tr>
+    <tr>
+      <td><label for="images">Obrazki</label></td>
+      <td>
+        <div formArrayName="images" id="images">
+          <div *ngFor="let image of images.controls; let i=index">
+            <label for="image-{{ i }}">{{i+1}}: </label>
+            <input id="image-{{ i }}" type="text" [formControlName]="i">
+          </div>
+          <button (click)="addIngredient(images)" type="button">Dodaj kolejny obrazek</button>
+          <button (click)="deleteIngredient(images)" [disabled]="images.length < 1" type="button">Zmniejsz ilość obrazków</button>
+        </div>
+      </td>
+      <td>Składniki</td>
+      <td>
+        <div formArrayName="skladniki" id="ingredients">
+          <div *ngFor="let ingredient of skladniki.controls; let j=index">
+            <label for="ingredient-{{ j }}">{{j+1}}: </label>
+            <input id="ingredient-{{ j }}" type="text" [formControlName]="j">
+          </div>
+          <button (click)="addIngredient(skladniki)" type="button">Dodaj kolejny składnik</button>
+          <button (click)="deleteIngredient(skladniki)" [disabled]="images.length < 1" type="button">Zmniejsz ilość składników</button>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td><label for="units">Ilość</label></td>
+      <td><input id="units" type="number" formControlName="units">
+        <p *ngIf="units.invalid && (units.dirty || units.touched)"
+           class="alert alert-danger"> Ilość powinna być pomiędzy 1 i 50</p>
+      </td>
+      <td> <label for="kategoria">Kategoria</label></td>
+      <td><input name="kategoria" type="text" id="kategoria" formControlName="kategoria">
+        <p *ngIf="kategoria.invalid && (kategoria.dirty || kategoria.touched)"
+           class="alert alert-danger"> Tylko litery !!!</p></td>
+    </tr>
+    <tr>
+      <td><label for="kuchnia">Kuchnia</label></td>
+      <td><input name="kuchnia" type="text" id="kuchnia" formControlName="kuchnia">
+        <p *ngIf="kuchnia.invalid && (kuchnia.dirty || kuchnia.touched)"
+           class="alert alert-danger"> Tylko litery !!!</p></td>
+      <td><label for="price">Cena</label></td>
+      <td>
+        <input id="price" type="number" formControlName="price">
+        <p *ngIf="price.invalid && (price.dirty || price.touched)"
+           class="alert alert-danger"> Cena powinna być pomiędzy 5 i 40</p>
+      </td>
+    </tr>
+  </table>
+  <h6>Uzupełnij nazwę, cenę, ilość, kuchnię oraz kategorię w celu dodania nowego dania</h6>
+  <button type="submit" id="submit" [disabled]="!dishForm.valid">Dodaj nowe danie</button>
+</form>
+</div>
+

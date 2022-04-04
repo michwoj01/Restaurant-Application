@@ -1,0 +1,88 @@
+<div *ngIf="order" id="container">
+  <div class="photos">
+    <div *ngFor="let image of order.dish.images">
+      <img alt="obrazek" src="{{image}}">
+    </div>
+  </div>
+  <div id="info">
+    <button (click)="location.back()" class="back">Powrót do menu</button>
+    <label for="kuchnia">KUCHNIA</label>
+    <input id="kuchnia" type="text" name="kuchnia" [(ngModel)]="order.dish.kuchnia">
+    <label for="kategoria">KATEGORIA</label>
+    <input id="kategoria" type="text" name="kategoria" [(ngModel)]="order.dish.kategoria">
+    <label for="description">Opis: </label>
+    <textarea style="text-align: center" id="description" name="description" [(ngModel)]="order.dish.description"></textarea>
+    <label>ZDJĘCIA</label>
+    <div *ngFor="let image of order.dish.images;let i = index;trackBy:trackByIdx">
+      <input style="width:40vw" [(ngModel)]="order.dish.images[i]">
+    </div>
+    <label>SKŁADNIKI</label>
+    <div id="skladniki" class="skl" *ngFor="let skladnik of order.dish.skladniki; let i = index;trackBy:trackByIdx">
+      <input type="text" [(ngModel)]="order.dish.skladniki[i]">
+    </div>
+    <label for="price">CENA: <input id="price" style="width: 3em" name="price" type="number" [(ngModel)]="order.dish.price">{{service.sharedData}}</label>
+    <button class="update" (click)="updateDish()">Zaktualizuj dane</button>
+    <div class="numbers">
+      <ng-template [ngIf]="order.dish.units>order.instock" [ngIfElse]="soldOut">
+        <div class="instock" [ngStyle]="{'color': service.changeColor(order)}">
+          Dostępne: {{order.dish.units - order.instock}}
+        </div>
+      </ng-template>
+      <ng-template #soldOut>
+        <div class="instock" style="color:red">
+          Niedostępne
+        </div>
+      </ng-template>
+      <button class="plus" *ngIf="order.dish.units > order.instock" (click) = "service.add(order)">+</button>
+      <button class="minus" *ngIf="order.instock > 0" (click) = "service.substract(order)">-</button>
+    </div>
+    <div>
+      <ul class="rating-list" *ngFor="let star of service.stars">
+        <li (click)="service.countStar(star,order)" [ngClass]="{'selected': (order.rate != null && star <= order.rate)}">
+          <i class="fa fa-star"></i></li>
+      </ul>
+      {{order.rate}}/5
+    </div>
+    <form [formGroup]="opinionForm" (ngSubmit)="service.addOpinion(this.order,this.opinionForm.value); opinionForm.reset()">
+      <label>Twój nick</label>
+      <input type="text" id="nick" formControlName="nick">
+      <div *ngIf="nick.invalid && (nick.dirty || nick.touched)"
+           class="alert alert-danger">
+        <div *ngIf="nick.errors?.['required']">
+          Nick jest obowiązkowy
+        </div>
+      </div>
+      <label>Tytuł twojego komentarza</label>
+      <input type="text" formControlName="title">
+      <div *ngIf="title.invalid && (title.dirty || title.touched)"
+           class="alert alert-danger">
+        <div *ngIf="title.errors?.['required']">
+          Tytuł komentarza jest obowiązkowy
+        </div>
+      </div>
+      <label>Twój komentarz</label>
+      <textarea rows="9" formControlName="body"></textarea>
+      <div *ngIf="body.invalid && (body.dirty || body.touched)"
+           class="alert alert-danger">
+        <div *ngIf="body.errors?.['required']">
+          Wypełnij treść komentarza
+        </div>
+        <div *ngIf="body.errors?.['minlength']">
+          Komentarz musi mieć przynajmniej 50 znaków
+        </div>
+        <div *ngIf="body.errors?.['maxlength']">
+          Komentarz może mieć co najwyżej 500 znaków
+        </div>
+      </div>
+      <label>Data zamówienia (opcjonalnie)</label>
+      <input type="date" formControlName="date">
+      <button type="submit" id="submit" [disabled]="!opinionForm.valid">Dodaj komentarz</button>
+    </form>
+    <div class="opinion" *ngFor="let opinion of order.opinions">
+      <h3>{{opinion.title}}</h3>
+      <p>{{opinion.body}}</p>
+      <h5 style="float:right"> {{opinion.nick}}</h5>
+      <h5 style="float:right">{{opinion.date}}</h5>
+    </div>
+  </div>
+</div>

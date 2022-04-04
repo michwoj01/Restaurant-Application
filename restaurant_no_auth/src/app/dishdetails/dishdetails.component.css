@@ -1,0 +1,110 @@
+#container{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "photos info";
+  width:100%;
+  text-align: center;
+  background-color: #5fbae1;
+}
+input{
+  text-align: center;
+}
+img{
+  margin:0;
+  padding: 0;
+  width: 100%;
+  display: block;
+}
+.photos{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+#info{
+  grid-area:info;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 2vh;
+  width:100%;
+  margin-top:2vh;
+  position: relative;
+}
+.numbers{
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  column-gap: 2vw;
+}
+.price,.instock,.name,.plus,.minus,.delete{
+  font-size: 2vw;
+}
+.plus,.minus{
+  height:3vw;
+  width: 3vw;
+  border-radius: 50%;
+  cursor:pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.plus {
+  background-color: greenyellow;
+}
+.minus{
+  background-color: red;
+}
+.update{
+  font-size: 2vw;
+  color: white;
+  background-color: #e600ff;
+  cursor:pointer;
+}
+.rating-list li {
+  float: right;
+  color: #ddd;
+  padding: 10px 5px;
+}
+.rating-list li:hover,
+.rating-list li:hover ~ li, .rating-list li.selected {
+  color: #ffd700;
+}
+.rating-list {
+  list-style: none;
+  grid-area: rating-list;
+  display: inline-block;
+  padding: 0;
+  margin:0;
+}
+.back{
+  position: absolute;
+  top:2vh;
+  left:2vw;
+  border-radius: 5%;
+  font-size:1vw;
+  padding:0.5vh 0.2vw;
+  cursor: pointer;
+}
+form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 1vh;
+}
+form > input[type="text"]{
+  width:30%;
+}
+textarea{
+  width:80%;
+}
+.opinion{
+  background-color: gold;
+  padding:1vh 1vw;
+}
+.alert{
+  color:red;
+  font-size: 1vw;
+  background-color: #070707;
+}
