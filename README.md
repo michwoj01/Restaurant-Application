@@ -11,6 +11,7 @@ Truncated version of the application without authentication and authorization mo
 <p align="center">
   <img src="git.gif" alt="animated">
 </p>
+
 ## Technologies
 * Angular.js
 * Firebase Firestore
